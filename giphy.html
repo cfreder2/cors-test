@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Giphy API</title>
+        <meta charset="utf-8"  />
+        
+    </head>
+    <body>
+
+        <label>GIF Topic</label>
+        <input id="topic"/>
+        <button id="submit">Submit</button>
+        <div>"Powered By GIPHY"</div>
+        <img id="gif"  crossOrigin="" src="https://media.giphy.com/media/Lr3UeH9tYu3qJtsSUg/giphy.gif"/>
+
+        <script>
+            const submitButton = document.getElementById("submit")
+            const topicTextField = document.getElementById("topic")
+            const image = document.getElementById("gif")
+
+            const apiKey = 'HXKNHt1i1gYbHKVb3bJfeYVBVLRlSqhI'
+            var base_url = 'https://api.giphy.com/v1/gifs/search?api_key=HXKNHt1i1gYbHKVb3bJfeYVBVLRlSqhI&limit=5&offset=0&rating=g&lang=en&q='
+            
+            submitButton.addEventListener("click", function() {
+                url = base_url + encodeURI(topicTextField.value)
+                
+                fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                  console.log(data.data[0].url)
+                  image.crossOrigin = ''
+                  image.src = data.data[0].url
+                })
+                
+            })
+        </script>
+    </body>
+</html>
